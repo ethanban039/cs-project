@@ -1,17 +1,29 @@
 * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-#nameinput {
+
+.infodiv {
     display: flex;
     justify-content: center;
-    margin: 40vh auto 0 auto;
-    width: 20vh;
-    height: 20vh;
+    margin: 30vh auto 0 auto;
+    flex-direction: column;
+    max-width: 15vh;
+    gap: 1.5vh;
+    background-color: aqua;
+    padding-right: 40vh;
+    padding-left: 20vh;
+    height: 25vh;
+    border-radius: 1vh;
 }
 
-#ageinput {
-    display: none;
-    justify-content: center;
-    align-items: center;
+.infodiv input {
+    border: rgb(102, 102, 102) 0.05vh solid;
+    padding: 0.8vh;
+    width: 20vh;
+    user-select: none;
 }
+ 
