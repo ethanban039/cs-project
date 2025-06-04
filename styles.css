@@ -1,0 +1,17 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#nameinput {
+    display: flex;
+    justify-content: center;
+    margin: 40vh auto 0 auto;
+    width: 20vh;
+    height: 20vh;
+}
+
+#ageinput {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
