@@ -5,25 +5,48 @@
     padding: 0;
 }
 
+#csprojtitle {
+    position: fixed;
+    margin: -20vh auto 0 -3%;
+}
+
 
 .infodiv {
     display: flex;
     justify-content: center;
     margin: 30vh auto 0 auto;
     flex-direction: column;
-    max-width: 15vh;
+    max-width: 20vh;
     gap: 1.5vh;
-    background-color: aqua;
+    background-color: rgb(78, 205, 236);
     padding-right: 40vh;
-    padding-left: 20vh;
+    padding-left: 19vh;
     height: 25vh;
     border-radius: 1vh;
+    box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.2);
+    border: 2px solid black;
 }
 
 .infodiv input {
     border: rgb(102, 102, 102) 0.05vh solid;
     padding: 0.8vh;
-    width: 20vh;
+    width: 22vh;
     user-select: none;
+    border-radius: 0.5vh;
 }
- 
+
+#unquserGenerated {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    margin-top: 2vh;
+    color: black;
+}
+
+
+
+/* body {
+background: #2A7B9B;
+background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 139, 199, 1) 50%, rgba(83, 237, 127, 1) 100%);
+}
+*/
