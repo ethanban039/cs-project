@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>AHA Student 5Wk Project</title>
     <link href="styles.css" rel="stylesheet">
-    <script src="script.js"></script>
-    <title>Document</title>
 </head>
-
 <body>
 
-
-<div class="infodiv">
-    <h2 id="csprojtitle">AHA Student Success Criteria</h2>
-    <input placeholder="Enter your name" id="nameinput" type="text">
-    <input placeholder="Enter your age" id="ageinput" type="number">
-    <input placeholder="Enter your Birth Month (1-12)" id="bminput" type="number">
-</div>
-<p id="unquserGenerated"></p>
-
+    <div class="container">
+        <h2 id="csprojtitle">AHA Student Success Critera</h2>
+        <div class="infodiv">
+            <input placeholder="Enter your name" id="nameinput" type="text">
+            <input placeholder="Enter your age" id="ageinput" type="number" min="11" max="18">
+            <input placeholder="Enter your Year Group (7-13)" id="yginput" type="number" min="7" max="13">
+            <button id="beginButton">Begin</button>
+        </div>
+        <p id="unquserGenerated"></p>
+    </div>
+    
+<script src="script.js"></script>
 </body>
 </html>
