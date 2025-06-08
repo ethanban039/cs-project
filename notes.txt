@@ -1,0 +1,2 @@
+Possible answers before handleCorrectClick() have to be equal to the correct answer (1-4)
+Possible answers before handleIncorrectClick() have to be equal to the incorrect answers (3 of 1-4)

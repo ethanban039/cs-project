@@ -7,17 +7,41 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" id="login-container">
         <h2 id="csprojtitle">AHA Student Success Critera</h2>
         <div class="infodiv">
-            <input placeholder="Enter your name" id="nameinput" type="text">
-            <input placeholder="Enter your age" id="ageinput" type="number" min="11" max="18">
+            <input placeholder="Enter your name (3+ chars)" id="nameinput" type="text">
+            <input placeholder="Enter your age (11-18)" id="ageinput" type="number" min="11" max="18">
             <input placeholder="Enter your Year Group (7-13)" id="yginput" type="number" min="7" max="13">
             <button id="beginButton">Begin</button>
         </div>
         <p id="unquserGenerated"></p>
     </div>
+
+    <div class="diff-container" id="difficulty-container" style="display: none;">
+        <h2 id="difftitle">Select a difficulty</h2>
+        <div class="selectDiffDiv">
+            <button id="easyselect" onclick="easyDiff()">Easy</button>
+            <button id="mediumselect" onclick="medDiff()">Medium</button>
+            <button id="hardselect" onclick="hardDiff()">Hard</button>
+        </div>
+    </div>
+
+    <div id="easyquizcontainer" style="display: none;">
+        <h2 id="easyquiztitle">Easy Quiz Section</h2>
+        <div class="easyquestionscontainer">
+            <h2 id="easyquestiontitle">Q1: What does HTML stand for?</h2>
+            <div class="easyanswers">
+                <p id="easyA1">a. HyperTool Markup Language</p>
+                <p id="easyA2">b. HyperText Markup Language</p>
+                <p id="easyA3">c. HyperText Marker Language</p>
+                <p id="easyA4">d. HyperTransfer Machine Language</p>
+            </div>
+        </div>
+    </div>
+
+    <p style="position: absolute; top: 95vh; right: 3vh;">Made by Ethan Bancroft</p>
     
-<script src="script.js"></script>
+<script src="easyquiz.js"></script>
 </body>
 </html>
