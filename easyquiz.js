@@ -134,7 +134,7 @@ function easyDiffFunctionality() {
     function handleCorrectClick() {
         possibleAnswer2.style.backgroundColor = "green";
         easyquizcontainer.append(correctmsg);
-        score + 1
+        score += 1
 
         setTimeout(() => { correctmsg.remove(); question = 2; possibleAnswer2.style.backgroundColor = "#33cef5"; 
         [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -170,7 +170,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer3.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
             setTimeout(() => { correctmsg.remove(); question = 3; possibleAnswer3.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -204,7 +204,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer1.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
              setTimeout(() => { correctmsg.remove(); question = 4; possibleAnswer1.style.backgroundColor = "#33cef5"; 
             [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -238,7 +238,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer4.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
              setTimeout(() => { correctmsg.remove(); question = 5; possibleAnswer4.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -272,7 +272,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer3.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
              setTimeout(() => { correctmsg.remove(); question = 6; possibleAnswer3.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -306,7 +306,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer4.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
              setTimeout(() => { correctmsg.remove(); question = 7; possibleAnswer4.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -341,7 +341,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer3.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
              setTimeout(() => { correctmsg.remove(); question = 8; possibleAnswer3.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -375,7 +375,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer1.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
              setTimeout(() => { correctmsg.remove(); question = 9; possibleAnswer1.style.backgroundColor = "#33cef5"; 
             [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -409,7 +409,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer2.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
              setTimeout(() => { correctmsg.remove(); question = 10; possibleAnswer2.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -443,7 +443,7 @@ function easyDiffFunctionality() {
             function handleCorrectClick() {
             possibleAnswer3.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
-            score + 1
+            score += 1
 
              setTimeout(() => { correctmsg.remove(); question = 11; possibleAnswer3.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
