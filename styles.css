@@ -155,3 +155,50 @@ body {
 .easyanswers p:active {
     opacity: 0.7;
 }
+
+/* ---------------MEDIUM QUIZ------------------- */
+
+#mediumquizcontainer {
+    flex-direction: column;
+    gap: 1.5vh;
+    background-color: #56c0e0;
+    padding: 3vh 4vh;
+    border: 2px black solid;
+    border-radius: 1.6vh;
+    width: 65vh;
+    text-shadow: 0.2vh 0.2vh 0.2vh rgba(0, 0, 0, 0.1);
+}
+
+#mediumquiztitle {
+    font-size: 2.1vh;
+    color: rgb(101, 86, 36);
+}
+
+#mediumquestiontitle {
+    font-size: 3vh;
+}
+
+.mediumanswers {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6vh;
+    font-size: 2vh;
+    cursor: pointer;
+}
+
+.mediumanswers p {
+    border: 2px black solid;
+    border-radius: 1.3vh;
+    padding: 0.8vh 0.9vh;
+    background-color: #33cef5;
+    transition: background-color, 0.25s;
+}
+
+.mediumanswers p:hover {
+    background-color: #33b5da;
+}
+
+.mediumanswers p:active {
+    opacity: 0.7;
+}
