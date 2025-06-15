@@ -963,6 +963,7 @@ function medDiffFunctionality() {
 
         const q10interval = setInterval(() => { // QUESTION 10
         if(question === 10) {
+            enableButtons()
             clearInterval(q10interval)
             mediumquestiontitle.textContent = "Q10: What is the file extension for React components?"
             possibleAnswer1.textContent = "a. .jsx"
