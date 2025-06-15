@@ -3,7 +3,6 @@ const buttons = document.querySelectorAll('p');
 
 function disableButtons() {
     buttons.forEach(button => {
-        button.style.cursor = "not-allowed";
         button.style.pointerEvents = "none";
     })
 }
@@ -11,7 +10,6 @@ function disableButtons() {
 
 function enableButtons() {
     buttons.forEach(button => {
-        button.style.cursor = "default";
         button.style.pointerEvents = "auto";
     })
 }
@@ -48,7 +46,6 @@ function showLoadAnimation() {
 
 // ALWAYS KEEPS THE HOVER BACKGROUND EFFECT ON EASY ANSWER QUESTIONS
 // Easy
-const eaMSenterleave = setInterval(() => {
     const easyquizanswers = document.querySelectorAll('.easyanswers p');
     easyquizanswers.forEach(p => {
         p.addEventListener('mouseenter', () => {
@@ -65,11 +62,9 @@ const eaMSenterleave = setInterval(() => {
             }
         })
     })
-}, 10) 
 
 
 // Medium
-const meMSenterleave = setInterval(() => {
     const mediumquizanswers = document.querySelectorAll('.mediumanswers p');
     mediumquizanswers.forEach(p => {
         p.addEventListener('mouseenter', () => {
@@ -85,8 +80,7 @@ const meMSenterleave = setInterval(() => {
                 p.style.backgroundColor = '#33cef5'
             }
         })
-    })
-}, 10)  
+    })  
     
     
 // ALWAYS KEEPS THE HOVER BACKGROUND EFFECT ON EASY ANSWER QUESTIONS
@@ -120,23 +114,24 @@ let difficultycontainer = document.getElementById('difficulty-container')
             const unquser = name.substring(0, 3) + age + `-${yearGroup}`;
             output.textContent = `Your Unique User Is: ${unquser}`
             
+            let startbtn = document.getElementById('beginButton')
             const pointerInterval = setInterval(() => {
-                let startbtn = document.getElementById('beginButton')
     
                 if(name.length < 3 || isNaN(age) || age < 1 || age > 100 || isNaN(yearGroup) || yearGroup < 7 || yearGroup > 13) {
                     startbtn.style.cursor = "not-allowed"
                 } else {
                     startbtn.style.cursor = "pointer"
-    
-                    startbtn.addEventListener('click', (e) => {
-                        e.preventDefault()
-                        console.log("Started, Interval Clearing")
-                        selectDifficulty() // Move onto the next bit
-                        clearInterval(pointerInterval)
-                        showLoadAnimation()
-                    })
                 }
-            }, 10)
+
+                clearInterval(pointerInterval)
+            }, 300)
+
+            startbtn.addEventListener('click', (e) => {
+                e.preventDefault()
+                console.log("Started, Interval Clearing")
+                selectDifficulty() // Move onto the next bit
+                showLoadAnimation()
+            })
         }
     
         nameInput.addEventListener('input', generateUsername);
@@ -155,8 +150,8 @@ function selectDifficulty() {
 
   fadeOut(loginContainer);
   
-  setTimeout(() => {
-    fadeInFlex(difficultyContainer);
+    setTimeout(() => {
+        fadeInFlex(difficultyContainer);
   }, 1300); // Matches with loading anim
 }
     
@@ -264,7 +259,7 @@ function selectDifficulty() {
                 [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer3.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 2
+        }, 300) // END OF QUESTION 2
     
             const q3interval = setInterval(() => { // QUESTION 3
             if(question === 3) {
@@ -301,7 +296,7 @@ function selectDifficulty() {
                 [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer1.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 3
+        }, 300) // END OF QUESTION 3
     
             const q4interval = setInterval(() => { // QUESTION 4
             if(question === 4) {
@@ -338,7 +333,7 @@ function selectDifficulty() {
                 [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer4.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 4
+        }, 300) // END OF QUESTION 4
     
             const q5interval = setInterval(() => { // QUESTION 5
             if(question === 5) {
@@ -375,7 +370,7 @@ function selectDifficulty() {
                 [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer3.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 5
+        }, 300) // END OF QUESTION 5
         
             const q6interval = setInterval(() => { // QUESTION 6
             if(question === 6) {
@@ -412,7 +407,7 @@ function selectDifficulty() {
                 [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer4.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 6
+        }, 300) // END OF QUESTION 6
     
             const q7interval = setInterval(() => { // QUESTION 7
             if(question === 7) {
@@ -450,7 +445,7 @@ function selectDifficulty() {
                 [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer3.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 7
+        }, 300) // END OF QUESTION 7
     
             const q8interval = setInterval(() => { // QUESTION 8
             if(question === 8) {
@@ -487,7 +482,7 @@ function selectDifficulty() {
                 [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer1.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 8
+        }, 300) // END OF QUESTION 8
         
             const q9interval = setInterval(() => { // QUESTION 9
             if(question === 9) {
@@ -524,7 +519,7 @@ function selectDifficulty() {
                 [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer2.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 9
+        }, 300) // END OF QUESTION 9
     
             const q10interval = setInterval(() => { // QUESTION 10
             if(question === 10) {
@@ -561,7 +556,7 @@ function selectDifficulty() {
                 [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer3.addEventListener('click', handleCorrectClick);
             }
-        }, 100) // END OF QUESTION 10
+        }, 300) // END OF QUESTION 10
     
             const qEndinterval = setInterval(() => { // THE END
             if(question === 11) {
@@ -608,10 +603,11 @@ function selectDifficulty() {
                     passOrfail.textContent = "You failed."
                 }
                 easyquizcontainer.append(passOrfail)
-    
-                clearInterval(eaMSenterleave) // Removes Interval to add Hover Effect, prevents memory leaks
+
             }
-        }, 100)
+        }, 300)
+
+        clearMemoryLeaks()
     } 
     
 // THE END OF EASY QUIZ & MAIN VARIABLES
@@ -704,7 +700,7 @@ function medDiffFunctionality() {
             [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer4.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 2
+    }, 300) // END OF QUESTION 2
 
         const q3interval = setInterval(() => { // QUESTION 3
         if(question === 3) {
@@ -741,7 +737,7 @@ function medDiffFunctionality() {
             [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer2.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 3
+    }, 300) // END OF QUESTION 3
 
         const q4interval = setInterval(() => { // QUESTION 4
         if(question === 4) {
@@ -778,7 +774,7 @@ function medDiffFunctionality() {
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer3.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 4
+    }, 300) // END OF QUESTION 4
     
         const q5interval = setInterval(() => { // QUESTION 5
         if(question === 5) {
@@ -815,7 +811,7 @@ function medDiffFunctionality() {
             [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer4.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 5
+    }, 300) // END OF QUESTION 5
 
         const q6interval = setInterval(() => { // QUESTION 6
         if(question === 6) {
@@ -852,7 +848,7 @@ function medDiffFunctionality() {
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer3.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 6
+    }, 300) // END OF QUESTION 6
 
         const q7interval = setInterval(() => { // QUESTION 7
         if(question === 7) {
@@ -889,7 +885,7 @@ function medDiffFunctionality() {
             [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer1.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 7
+    }, 300) // END OF QUESTION 7
 
         const q8interval = setInterval(() => { // QUESTION 8
         if(question === 8) {
@@ -926,7 +922,7 @@ function medDiffFunctionality() {
             [possibleAnswer3, possibleAnswer1, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer2.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 8
+    }, 300) // END OF QUESTION 8
 
         const q9interval = setInterval(() => { // QUESTION 9
         if(question === 9) {
@@ -963,7 +959,7 @@ function medDiffFunctionality() {
             [possibleAnswer3, possibleAnswer1, possibleAnswer2].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer4.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 9
+    }, 300) // END OF QUESTION 9
 
         const q10interval = setInterval(() => { // QUESTION 10
         if(question === 10) {
@@ -999,7 +995,7 @@ function medDiffFunctionality() {
             [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.addEventListener('click', handleIncorrectClick));
             possibleAnswer1.addEventListener('click', handleCorrectClick);
         }
-    }, 100) // END OF QUESTION 10
+    }, 300) // END OF QUESTION 10
 
     const qEndinterval = setInterval(() => {
         if(question === 11) {
@@ -1046,8 +1042,14 @@ function medDiffFunctionality() {
                 passOrfail.textContent = "You failed."
             }
             mediumquizcontainer.append(passOrfail)
-
-            clearInterval(meMSenterleave)
         }
-    }, 100)
+    }, 300)
+    clearMemoryLeaks()
+}
+
+
+function clearMemoryLeaks() {
+    window.clearTimeout()
+    window.clearInterval()
+    window.removeEventListener()
 }

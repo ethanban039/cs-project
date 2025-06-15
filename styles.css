@@ -195,20 +195,6 @@ body {
     box-shadow: 0 0.3vh 0.6vh rgba(0, 0, 0, 0.2);
 }
 
-.selectDiffDiv button,
-.easyanswers p,
-.mediumanswers p {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.selectDiffDiv button:hover,
-.easyanswers p:hover,
-.mediumanswers p:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0.5vh 1.2vh rgba(0, 0, 0, 0.15)
-}
-
-
 /* -------------- ALL DIFFICULTY CONTAINERS STYLES ------------------ */
 #easyquizcontainer, #mediumquizcontainer {
     max-width: 60vh;
@@ -271,7 +257,6 @@ body {
 
 .easyanswers p:hover {
     background-color: #33b5da;
-    cursor: pointer;
 }
 
 .easyanswers p:active {
