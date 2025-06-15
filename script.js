@@ -16,7 +16,33 @@ function enableButtons() {
     })
 }
 
+function fadeInFlex(element) {
+  element.classList.add('fade-container');
+  element.style.display = 'flex';
+  requestAnimationFrame(() => {
+    element.classList.add('visible');
+  });
+}
 
+
+function fadeOut(element) {
+  element.classList.remove('visible');
+  element.addEventListener('transitionend', function handler() {
+    element.style.display = 'none';
+    element.removeEventListener('transitionend', handler);
+  });
+}
+
+
+// LOAD ANIMATION
+function showLoadAnimation() {
+    const loadingAnim = document.getElementById('loadanimcontainer')   
+    fadeInFlex(loadingAnim)
+    loadingAnim.style.visibility = "visible"
+    loadingAnim.style.display = "flex"
+
+    const loadingTimeout = setTimeout(() => { loadingAnim.style.display = "none"; loadingAnim.style.visibility = "hidden"; clearTimeout(loadingTimeout) }, 1300)
+}
 
 
 
@@ -65,7 +91,14 @@ const meMSenterleave = setInterval(() => {
     
 // ALWAYS KEEPS THE HOVER BACKGROUND EFFECT ON EASY ANSWER QUESTIONS
     
+let easy = document.getElementById('easyselect')
+let medium = document.getElementById('mediumselect')
+let hard = document.getElementById('hardselect')
+let difficulty = 0
     
+let logincontainer = document.getElementById('login-container')
+let difficultycontainer = document.getElementById('difficulty-container')
+
     
     
     document.addEventListener('DOMContentLoaded', () => {
@@ -100,6 +133,7 @@ const meMSenterleave = setInterval(() => {
                         console.log("Started, Interval Clearing")
                         selectDifficulty() // Move onto the next bit
                         clearInterval(pointerInterval)
+                        showLoadAnimation()
                     })
                 }
             }, 10)
@@ -112,20 +146,19 @@ const meMSenterleave = setInterval(() => {
     
     
     // ---------------------------------------------------------------(Above is Details & Unique User Generator)------------------------------------------------------------------------------- //
-    let easy = document.getElementById('easyselect')
-    let medium = document.getElementById('mediumselect')
-    let hard = document.getElementById('hardselect')
-    let difficulty = 0
-    
-    let logincontainer = document.getElementById('login-container')
-    let difficultycontainer = document.getElementById('difficulty-container')
     
     let easyquizcontainer = document.getElementById('easyquizcontainer')
     
-    function selectDifficulty() {
-        logincontainer = document.getElementById('login-container').style.display = "none"
-        difficultycontainer = document.getElementById('difficulty-container').style.display = "flex"
-    }
+function selectDifficulty() {
+  const loginContainer = document.getElementById('login-container');
+  const difficultyContainer = document.getElementById('difficulty-container');
+
+  fadeOut(loginContainer);
+  
+  setTimeout(() => {
+    fadeInFlex(difficultyContainer);
+  }, 1300); // Matches with loading anim
+}
     
     
     let incorrectmsg = document.createElement('p')
@@ -144,10 +177,13 @@ const meMSenterleave = setInterval(() => {
     
     
     function easyDiff() {
+        showLoadAnimation()
         difficulty = "Easy"
         console.log("Easy Difficulty Chosen, setting display")
         difficultycontainer = document.getElementById('difficulty-container').style.display = "none" // Hides difficulty selector
-        easyquizcontainer = document.getElementById('easyquizcontainer').style.display = "flex" // Shows the easy quiz
+        setTimeout(() => {
+            fadeInFlex(easyquizcontainer)
+        }, 1300)
         easyDiffFunctionality()
     }
     
@@ -585,10 +621,13 @@ let mediumquestiontitle = document.getElementById('mediumquestiontitle')
 
 
 function medDiff() {
+    showLoadAnimation()
     difficulty = "Medium"
     console.log("Medium Difficulty Chosen, setting display")
     difficultycontainer = document.getElementById('difficulty-container').style.display = "none" // Hides difficulty selector
-    mediumquizcontainer = document.getElementById('mediumquizcontainer').style.display = "flex" // Shows the easy quiz
+    setTimeout(() => {
+        fadeInFlex(mediumquizcontainer)
+    }, 1300) // Matches load animation
     medDiffFunctionality()
 }
 
@@ -608,6 +647,8 @@ function medDiffFunctionality() {
             possibleAnswer2.style.backgroundColor = "green" // Correct answer is 2
             e.target.style.backgroundColor = "red"
             mediumquizcontainer.append(incorrectmsg)
+            disableButtons()
+
             setTimeout(() => { incorrectmsg.remove(); question = 2; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5" ;
             [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000)
@@ -617,6 +658,7 @@ function medDiffFunctionality() {
             possibleAnswer2.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg)
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 2; possibleAnswer2.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
@@ -629,6 +671,7 @@ function medDiffFunctionality() {
 
     const q2interval = setInterval(() => { // QUESTION 2
         if(question === 2) {
+            enableButtons()
             clearInterval(q2interval)
             mediumquestiontitle.textContent = "Q2: How do you delay code?"
             possibleAnswer1.textContent = "a. setDelayTime(() => {})"
@@ -640,6 +683,7 @@ function medDiffFunctionality() {
             possibleAnswer4.style.backgroundColor = "green"; // Corect answer is (4)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 3; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -650,6 +694,7 @@ function medDiffFunctionality() {
             possibleAnswer4.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 3; possibleAnswer4.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -663,6 +708,7 @@ function medDiffFunctionality() {
 
         const q3interval = setInterval(() => { // QUESTION 3
         if(question === 3) {
+            enableButtons()
             clearInterval(q3interval)
             mediumquestiontitle.textContent = "Q3: What is the output of `typeof null` in JS?"
             possibleAnswer1.textContent = "a. null"
@@ -674,6 +720,7 @@ function medDiffFunctionality() {
             possibleAnswer2.style.backgroundColor = "green"; // Corect answer is (2)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 4; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -684,6 +731,7 @@ function medDiffFunctionality() {
             possibleAnswer2.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 4; possibleAnswer2.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -697,6 +745,7 @@ function medDiffFunctionality() {
 
         const q4interval = setInterval(() => { // QUESTION 4
         if(question === 4) {
+            enableButtons()
             clearInterval(q4interval)
             mediumquestiontitle.textContent = "Q4: Which is a primitive data type in Javascript?"
             possibleAnswer1.textContent = "a. Array"
@@ -708,6 +757,7 @@ function medDiffFunctionality() {
             possibleAnswer3.style.backgroundColor = "green"; // Corect answer is (3)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 5; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -718,6 +768,7 @@ function medDiffFunctionality() {
             possibleAnswer3.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 5; possibleAnswer3.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -731,6 +782,7 @@ function medDiffFunctionality() {
     
         const q5interval = setInterval(() => { // QUESTION 5
         if(question === 5) {
+            enableButtons()
             clearInterval(q5interval)
             mediumquestiontitle.textContent = "Q5: What is a Javascript Module?"
             possibleAnswer1.textContent = "a. Lets you add JS code into HTML code"
@@ -742,6 +794,7 @@ function medDiffFunctionality() {
             possibleAnswer4.style.backgroundColor = "green"; // Corect answer is (4)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 6; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -752,6 +805,7 @@ function medDiffFunctionality() {
             possibleAnswer4.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 6; possibleAnswer4.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -765,6 +819,7 @@ function medDiffFunctionality() {
 
         const q6interval = setInterval(() => { // QUESTION 6
         if(question === 6) {
+            enableButtons()
             clearInterval(q6interval)
             mediumquestiontitle.textContent = "Q6: What does the `===` operator do in Javascript?"
             possibleAnswer1.textContent = "a. Assigns a value"
@@ -776,6 +831,7 @@ function medDiffFunctionality() {
             possibleAnswer3.style.backgroundColor = "green"; // Corect answer is (3)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 7; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -786,6 +842,7 @@ function medDiffFunctionality() {
             possibleAnswer3.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 7; possibleAnswer3.style.backgroundColor = "#33cef5"; 
             [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -799,6 +856,7 @@ function medDiffFunctionality() {
 
         const q7interval = setInterval(() => { // QUESTION 7
         if(question === 7) {
+            enableButtons()
             clearInterval(q7interval)
             mediumquestiontitle.textContent = "Q7: Which keyword is used to delare a constant in JS?"
             possibleAnswer1.textContent = "a. const"
@@ -810,6 +868,7 @@ function medDiffFunctionality() {
             possibleAnswer1.style.backgroundColor = "green"; // Corect answer is (1)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 8; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5"; 
             [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -820,6 +879,7 @@ function medDiffFunctionality() {
             possibleAnswer1.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 8; possibleAnswer1.style.backgroundColor = "#33cef5"; 
             [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -833,6 +893,7 @@ function medDiffFunctionality() {
 
         const q8interval = setInterval(() => { // QUESTION 8
         if(question === 8) {
+            enableButtons()
             clearInterval(q8interval)
             mediumquestiontitle.textContent = "Q8: What is a React component?"
             possibleAnswer1.textContent = "a. A type of CSS file"
@@ -844,6 +905,7 @@ function medDiffFunctionality() {
             possibleAnswer2.style.backgroundColor = "green"; // Corect answer is (2)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 9; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5"; 
             [possibleAnswer3, possibleAnswer1, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -854,6 +916,7 @@ function medDiffFunctionality() {
             possibleAnswer2.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 9; possibleAnswer2.style.backgroundColor = "#33cef5"; 
             [possibleAnswer3, possibleAnswer1, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -867,6 +930,7 @@ function medDiffFunctionality() {
 
         const q9interval = setInterval(() => { // QUESTION 9
         if(question === 9) {
+            enableButtons()
             clearInterval(q9interval)
             mediumquestiontitle.textContent = "Q9: What is JSX?"
             possibleAnswer1.textContent = "a. A file type for JSON"
@@ -878,6 +942,7 @@ function medDiffFunctionality() {
             possibleAnswer4.style.backgroundColor = "green"; // Corect answer is (4)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 10; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"; 
             [possibleAnswer3, possibleAnswer1, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -888,6 +953,7 @@ function medDiffFunctionality() {
             possibleAnswer4.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 10; possibleAnswer4.style.backgroundColor = "#33cef5"; 
             [possibleAnswer3, possibleAnswer1, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -912,6 +978,7 @@ function medDiffFunctionality() {
             possibleAnswer1.style.backgroundColor = "green"; // Corect answer is (1)
             e.target.style.backgroundColor = "red";
             mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
 
             setTimeout(() => { incorrectmsg.remove(); question = 11; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5"; 
             [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
@@ -922,6 +989,7 @@ function medDiffFunctionality() {
             possibleAnswer1.style.backgroundColor = "green";
             mediumquizcontainer.append(correctmsg);
             score = score + 1
+            disableButtons()
 
             setTimeout(() => { correctmsg.remove(); question = 11; possibleAnswer1.style.backgroundColor = "#33cef5"; 
             [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 

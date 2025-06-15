@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <div class="container" id="login-container">
+    <div class="fade-container visible" id="login-container">
         <h2 id="csprojtitle">AHA Student Success Critera</h2>
         <div class="infodiv">
             <input placeholder="Enter your name (3+ chars)" id="nameinput" type="text">
@@ -18,8 +18,15 @@
         <p id="unquserGenerated"></p>
     </div>
 
-    <div class="diff-container" id="difficulty-container" style="display: none;">
-        <h2 id="difftitle">Select a difficulty</h2>
+    <div class="loadingcontainer" id="loadanimcontainer" style="display: none;">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="fade-container" id="difficulty-container" style="display: none;">
+        <h2 id="difftitle"><span class="emoji">🎯</span> Select a difficulty</h2>
         <div class="selectDiffDiv">
             <button id="easyselect" onclick="easyDiff()">Easy</button>
             <button id="mediumselect" onclick="medDiff()">Medium</button>

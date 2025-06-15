@@ -15,7 +15,21 @@ body {
     background: linear-gradient(135deg, #a3d8f4, #d2f1ff);
 }
 
-.container {
+.fade-container {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    transition: 0.5s opacity ease;
+}
+
+.fade-container.visible {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+#login-container {
+    flex-direction: column;
     text-align: center;
     background-color: #e3f6ff;
     border-radius: 1.2vh;
@@ -66,9 +80,63 @@ body {
 
 /* ---------------------------------Login Page ^^^^----------------------------------- */
 /* ------------------------------------------------------------------------------------------ */
+/* -------------------------------Loading Screen Styles----------------------------------- */
+
+  .loadingcontainer {
+    --uib-size: 35px;
+    --uib-color: black;
+    --uib-speed: 1s;
+    --uib-stroke: 3.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: var(--uib-size);
+    height: calc(var(--uib-size) * 0.9);
+  }
+
+  .bar {
+    width: var(--uib-stroke);
+    height: 100%;
+    background-color: var(--uib-color);
+    transition: background-color 0.3s ease;
+  }
+
+  .bar:nth-child(1) {
+    animation: grow var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.45)
+      infinite;
+  }
+
+  .bar:nth-child(2) {
+    animation: grow var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.3)
+      infinite;
+  }
+
+  .bar:nth-child(3) {
+    animation: grow var(--uib-speed) ease-in-out calc(var(--uib-speed) * -0.15)
+      infinite;
+  }
+
+  .bar:nth-child(4) {
+    animation: grow var(--uib-speed) ease-in-out infinite;
+  }
+
+  @keyframes grow {
+    0%,
+    100% {
+      transform: scaleY(0.3);
+    }
+
+    50% {
+      transform: scaleY(1);
+    }
+  }
+
+
+/* ---------------------------------Loading Screen Styles ^^^^----------------------------------- */
+/* ------------------------------------------------------------------------------------------ */
 /* -------------------------------Difficulty Selector----------------------------------- */
 
-.diff-container {
+#difficulty-container {
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -79,6 +147,19 @@ body {
 #difftitle {
     margin-bottom: 3vh;
     font-size: 4vh;
+    font-weight: 700;
+    color: #045a8d;
+    text-shadow: 0.2vh 0.2vh 0.6vh rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+    animation: fadeSlideIn 0.5s ease;
+}
+
+#difftitle .emoji {
+    font-size: 4.5vh;
+    animation: bounce 1.5s infinite ease-in-out;
 }
 
 .selectDiffDiv {
@@ -90,24 +171,64 @@ body {
 }
 
 .selectDiffDiv button {
-    width: 21vh;
-    font-size: 2vh;
-    background: #56c0e0;
-    border: 2px black solid;
-    border-radius: 0.6vh;
-    padding: 1vh;
-    transition: background-color 0.3s ease;
-    transition: font-size 0.15s ease;
-    cursor: pointer;
+    width: 24vh;
+    font-size: 2.2vh;
+    font-weight: 600;
+    background: linear-gradient(to right, #56c0e0, #3fa9c2);
+    color: white;
+    border: 2px ridge black;
+    border-radius: 1vh;
+    padding: 1.4vh 2vh;
+    box-shadow: 0 0.6vh 1.2vh rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+    letter-spacing: 0.05vh;
 }
 
 .selectDiffDiv button:hover {
-    background-color: #399cb5;
+    background: linear-gradient(to right, #3fa9c2, #2b90a8);
+    transform: scale(1.05);
+    box-shadow: 0 0.8vh 1.6vh rgba(0, 0, 0, 0.2);
 }
 
 .selectDiffDiv button:active {
-    opacity: 0.7;
+    transform: scale(0.97);
+    box-shadow: 0 0.3vh 0.6vh rgba(0, 0, 0, 0.2);
 }
+
+.selectDiffDiv button,
+.easyanswers p,
+.mediumanswers p {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.selectDiffDiv button:hover,
+.easyanswers p:hover,
+.mediumanswers p:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0.5vh 1.2vh rgba(0, 0, 0, 0.15)
+}
+
+
+/* -------------- ALL DIFFICULTY CONTAINERS STYLES ------------------ */
+#easyquizcontainer, #mediumquizcontainer {
+    max-width: 60vh;
+    margin: 0 auto;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-container.visible h2,
+.fade-container.visible p {
+    animation: fadeSlideIn 0.4s ease;
+}
+
+
+
+
+
 
 /* ---------------EASY QUIZ------------------- */
 
@@ -150,6 +271,7 @@ body {
 
 .easyanswers p:hover {
     background-color: #33b5da;
+    cursor: pointer;
 }
 
 .easyanswers p:active {
@@ -196,6 +318,7 @@ body {
 
 .mediumanswers p:hover {
     background-color: #33b5da;
+    cursor: pointer;
 }
 
 .mediumanswers p:active {
