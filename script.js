@@ -1,3 +1,4 @@
+
 const buttons = document.querySelectorAll('p');
 
 
@@ -1048,6 +1049,105 @@ function medDiffFunctionality() {
     }, 300)
     clearMemoryLeaks()
 }
+
+// END OF MEDIUM QUIZ
+
+
+
+
+let hardquizcontainer = document.getElementById('hardquizcontainer')
+let hardquestiontitle = document.getElementById('hardquestiontitle')
+
+
+function hardDiff() {
+    showLoadAnimation()
+    difficulty = "Hard"
+    console.log("Hard Difficulty Chosen, setting display")
+    difficultycontainer = document.getElementById('difficulty-container').style.display = "none" // Hides difficulty selector
+    setTimeout(() => {
+        fadeInFlex(hardquizcontainer)
+    }, 1300) // Matches load animation
+    hardDiffFunctionality()
+}
+
+
+function hardDiffFunctionality() {
+    const hardquizcontainer = document.getElementById('hardquizcontainer')
+    let question = 1
+    let hardquestiontitle = document.getElementById('hardquestiontitle')
+    let possibleAnswer1 = document.getElementById('hardA1') 
+    let possibleAnswer2 = document.getElementById('hardA2')
+    let possibleAnswer3 = document.getElementById('hardA3')
+    let possibleAnswer4 = document.getElementById('hardA4')
+
+    let score = 0
+
+    if(question === 1) { // QUESTION 1
+        function handleIncorrectClick(e) {
+            possibleAnswer4.style.backgroundColor = "green" // Correct answer is 4
+            e.target.style.backgroundColor = "red"
+            hardquizcontainer.append(incorrectmsg)
+            disableButtons()
+
+            setTimeout(() => { incorrectmsg.remove(); question = 2; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"  ;
+            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000)
+        }
+
+        function handleCorrectClick() {
+            possibleAnswer4.style.backgroundColor = "green";
+            hardquizcontainer.append(correctmsg)
+            score = score + 1
+            disableButtons()
+
+            setTimeout(() => { correctmsg.remove(); question = 2; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000)
+        }
+
+        [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.addEventListener('click', handleIncorrectClick));
+        possibleAnswer4.addEventListener('click', handleCorrectClick)
+    } // END OF QUESTION 1
+
+    const q2interval = setInterval(() => { // QUESTION 2
+        if(question === 2) {
+            enableButtons()
+            clearInterval(q2interval)
+            hardquestiontitle.textContent = "Q2: How does JS handle type coercion with == ?"
+            possibleAnswer1.textContent = "a. It compares values without converting types"
+            possibleAnswer2.textContent = "b. It converts both values to strings before comparing"
+            possibleAnswer3.textContent = "c. It converts operands to the same type before comparing"
+            possibleAnswer4.textContent = "d. It throws an error if types differ"
+
+            function handleIncorrectClick(e) {
+            possibleAnswer3.style.backgroundColor = "green"; // Corect answer is (3)
+            e.target.style.backgroundColor = "red";
+            mediumquizcontainer.append(incorrectmsg);
+            disableButtons()
+
+            setTimeout(() => { incorrectmsg.remove(); question = 3; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            function handleCorrectClick() {
+            possibleAnswer3.style.backgroundColor = "green";
+            hardquizcontainer.append(correctmsg);
+            score = score + 1
+            disableButtons()
+
+            setTimeout(() => { correctmsg.remove(); question = 3; possibleAnswer3.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
+            possibleAnswer3.addEventListener('click', handleCorrectClick);
+        }
+    }, 300) // END OF QUESTION 2
+}
+
+
 
 
 function clearMemoryLeaks() {
