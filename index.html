@@ -10,9 +10,9 @@
     <div class="fade-container visible" id="login-container">
         <h2 id="csprojtitle">AHA Student Success Critera</h2>
         <div class="infodiv">
-            <input placeholder="Enter your name (3+ chars)" id="nameinput" type="text">
-            <input placeholder="Enter your age (11-18)" id="ageinput" type="number" min="11" max="18">
-            <input placeholder="Enter your Year Group (7-13)" id="yginput" type="number" min="7" max="13">
+            <input placeholder="Enter your name (3+ chars)" id="nameinput" type="text" required="required" class="form-control">
+            <input placeholder="Enter your age (11-18)" id="ageinput" type="number" min="11" max="18" required="required">
+            <input placeholder="Enter your Year Group (7-13)" id="yginput" type="number" min="7" max="13" required="required">
             <button id="beginButton">Begin</button>
         </div>
         <p id="unquserGenerated"></p>
@@ -41,7 +41,7 @@
             <div class="easyanswers">
                 <p id="easyA1">a. HyperTool Markup Language</p>
                 <p id="easyA2">b. HyperText Markup Language</p>
-                <p id="easyA3">c. HyperText Marker Language</p>
+                <p id="easyA3">c.+ HyperText Marker Language</p>
                 <p id="easyA4">d. HyperTransfer Machine Language</p>
             </div>
         </div>
@@ -60,8 +60,43 @@
         </div>
     </div>
 
-    <p style="position: absolute; top: 95vh; right: 3vh;">Made by Ethan Bancroft</p>
-    
+    <div id="hardquizcontainer" style="display: none;">
+        <h2 id="hardquiztitle">Hard Quiz Section</h2>
+        <div class="hardquestionscontainer">
+            <h2 id="hardquestiontitle">Q1: What is the difference between let and const?</h2>
+            <div class="hardanswers">
+                <p id="hardA1">a. let is function-scoped, const is block-scoped</p>
+                <p id="hardA2">b. let is used for constants, const for variables</p>
+                <p id="hardA3">c. const variables are hoisted, let variables are not</p>
+                <p id="hardA4">d. let allows reassignment, const does not</p>
+            </div>
+        </div>
+    </div>
+
+
+    <a href="https://ethanbancroft.co.uk/">Made by Ethan Bancroft</a>
+
+    <audio id="bg-music" src="backgroundmusic.mp3" loop></audio>
+
 <script src="script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+    window.addEventListener('load', () => {
+        const audio = document.getElementById('bg-music');
+
+        audio.play().catch(error => {
+            console.warn('Autoplay was blocked. Waiting for user interaction..')
+        });
+
+        document.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+            }
+        })
+    })
+</script>
+
+
 </body>
 </html>

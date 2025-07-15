@@ -34,7 +34,7 @@ function fadeOut(element) {
 
 // LOAD ANIMATION
 function showLoadAnimation() {
-    const loadingAnim = document.getElementById('loadanimcontainer')   
+    const loadingAnim = document.getElementById('loadanimcontainer')  
     fadeInFlex(loadingAnim)
     loadingAnim.style.visibility = "visible"
     loadingAnim.style.display = "flex"
@@ -54,7 +54,7 @@ function showLoadAnimation() {
             }
         })
     })
-    
+   
     easyquizanswers.forEach(p => {
         p.addEventListener('mouseleave', () => {
             if(p.style.backgroundColor != 'green' && p.style.backgroundColor != 'red') { // Doesn't change BGC if the answers are red or green
@@ -73,7 +73,7 @@ function showLoadAnimation() {
             }
         })
     })
-    
+   
     mediumquizanswers.forEach(p => {
         p.addEventListener('mouseleave', () => {
             if(p.style.backgroundColor != 'green' && p.style.backgroundColor != 'red') { // Doesn't change BGC if the answers are red or green
@@ -81,48 +81,49 @@ function showLoadAnimation() {
             }
         })
     })  
-    
-    
+   
+   
 // ALWAYS KEEPS THE HOVER BACKGROUND EFFECT ON EASY ANSWER QUESTIONS
-    
+   
 let easy = document.getElementById('easyselect')
 let medium = document.getElementById('mediumselect')
 let hard = document.getElementById('hardselect')
 let difficulty = 0
-    
+   
 let logincontainer = document.getElementById('login-container')
 let difficultycontainer = document.getElementById('difficulty-container')
 
-    
-    
+   
+   
     document.addEventListener('DOMContentLoaded', () => {
         const nameInput = document.getElementById('nameinput');
         const ageInput = document.getElementById('ageinput');
         const yearInput = document.getElementById('yginput');
         const output = document.getElementById('unquserGenerated');
-    
+        output.style.color = "white"
+   
         function generateUsername() {
             const name = nameInput.value.trim();
             const age = parseInt(ageInput.value);
             const yearGroup = parseInt(yearInput.value)
-    
-            if(name.length < 3 || isNaN(age) || age < 1 || age > 100 || isNaN(yearGroup) || yearGroup < 7 || yearGroup > 13) {
+   
+            if(name.length < 3 || isNaN(age) || age < 1 || age > 100 || isNaN(yearGroup) || yearGroup < 7 || yearGroup > 13 || (isFinite(age) === false) || isFinite(yearGroup) === false) {
                 output.textContent = "Please enter valid details."
                 return;
             }
-    
+   
             const unquser = name.substring(0, 3) + age + `-${yearGroup}`;
             output.textContent = `Your Unique User Is: ${unquser}`
-            
+           
             let startbtn = document.getElementById('beginButton')
             const pointerInterval = setInterval(() => {
-    
+   
                 if(name.length < 3 || isNaN(age) || age < 1 || age > 100 || isNaN(yearGroup) || yearGroup < 7 || yearGroup > 13) {
                     startbtn.style.cursor = "not-allowed"
                 } else {
                     startbtn.style.cursor = "pointer"
                 }
-
+                
                 clearInterval(pointerInterval)
             }, 300)
 
@@ -133,44 +134,44 @@ let difficultycontainer = document.getElementById('difficulty-container')
                 showLoadAnimation()
             })
         }
-    
+   
         nameInput.addEventListener('input', generateUsername);
         ageInput.addEventListener('input', generateUsername);
         yearInput.addEventListener('input', generateUsername);
     })
-    
-    
+   
+   
     // ---------------------------------------------------------------(Above is Details & Unique User Generator)------------------------------------------------------------------------------- //
-    
+   
     let easyquizcontainer = document.getElementById('easyquizcontainer')
-    
+   
 function selectDifficulty() {
   const loginContainer = document.getElementById('login-container');
   const difficultyContainer = document.getElementById('difficulty-container');
 
   fadeOut(loginContainer);
-  
+ 
     setTimeout(() => {
         fadeInFlex(difficultyContainer);
   }, 1300); // Matches with loading anim
 }
-    
-    
+   
+   
     let incorrectmsg = document.createElement('p')
     incorrectmsg.textContent = "Incorrect Answer. Moving onto the next question.."
     incorrectmsg.style.color = "red"
     incorrectmsg.style.textAlign = "center"
     incorrectmsg.style.fontSize = "2.1vh"
-    
+   
     let correctmsg = document.createElement('p')
     correctmsg.textContent = "Correct Answer! Moving onto the next question.."
     correctmsg.style.color = "green"
     correctmsg.style.textAlign = "center"
     correctmsg.style.fontSize = "2.1vh"
-    
+   
     // ------------------------------------------------------- EASY QUIZ --------------------------------------------------------- //
-    
-    
+   
+   
     function easyDiff() {
         showLoadAnimation()
         difficulty = "Easy"
@@ -181,49 +182,49 @@ function selectDifficulty() {
         }, 1300)
         easyDiffFunctionality()
     }
-    
+   
     function easyDiffFunctionality() {
         const easyquizcontainer = document.getElementById('easyquizcontainer')
         let question = 1
         let questionTitle = document.getElementById('easyquestiontitle')
         let possibleAnswer1 = document.getElementById('easyA1')
-        let possibleAnswer2 = document.getElementById('easyA2') //  All the 
+        let possibleAnswer2 = document.getElementById('easyA2') //  All the
         let possibleAnswer3 = document.getElementById('easyA3') //  possible answers
         let possibleAnswer4 = document.getElementById('easyA4')
-    
+   
         let score = 0
-    
+   
         if (question === 1) { // QUESTION 1
             function handleIncorrectClick(e) {
             possibleAnswer2.style.backgroundColor = "green";
             e.target.style.backgroundColor = "red";
             easyquizcontainer.append(incorrectmsg);
             disableButtons()
-    
-            setTimeout(() => { incorrectmsg.remove(); question = 2; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+            setTimeout(() => { incorrectmsg.remove(); question = 2; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
         function handleCorrectClick() {
             possibleAnswer2.style.backgroundColor = "green";
             easyquizcontainer.append(correctmsg);
             score = score + 1
             disableButtons()
-            
-            
-            setTimeout(() => { correctmsg.remove(); question = 2; possibleAnswer2.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+           
+           
+            setTimeout(() => { correctmsg.remove(); question = 2; possibleAnswer2.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
         [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
         possibleAnswer2.addEventListener('click', handleCorrectClick);
     } // END OF QUESTION 1
-    
-    
-    
-    
+   
+   
+   
+   
         const q2interval = setInterval(() => { // QUESTION 2
             if(question === 2) {
                 enableButtons()
@@ -233,34 +234,34 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. To secure a website"
                 possibleAnswer3.textContent = "c. To style and design a website"
                 possibleAnswer4.textContent = "d. To structure a website"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer3.style.backgroundColor = "green"; // Corect answer is (3)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 3; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 3; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer3.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                setTimeout(() => { correctmsg.remove(); question = 3; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { correctmsg.remove(); question = 3; possibleAnswer3.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer3.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 2
-    
+   
             const q3interval = setInterval(() => { // QUESTION 3
             if(question === 3) {
                 enableButtons()
@@ -270,34 +271,34 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. Computer Style Syntax"
                 possibleAnswer3.textContent = "c. Creative Styling System"
                 possibleAnswer4.textContent = "d. Colorful Sheet Selector"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer1.style.backgroundColor = "green"; // Corect answer is (1)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 4; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 4; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5";
+                [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer1.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                 setTimeout(() => { correctmsg.remove(); question = 4; possibleAnswer1.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                 setTimeout(() => { correctmsg.remove(); question = 4; possibleAnswer1.style.backgroundColor = "#33cef5";
+                [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer1.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 3
-    
+   
             const q4interval = setInterval(() => { // QUESTION 4
             if(question === 4) {
                 enableButtons()
@@ -307,34 +308,34 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. let"
                 possibleAnswer3.textContent = "c. const"
                 possibleAnswer4.textContent = "d. str"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer4.style.backgroundColor = "green"; // Corect answer is (4)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 5; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 5; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer4.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                 setTimeout(() => { correctmsg.remove(); question = 5; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                 setTimeout(() => { correctmsg.remove(); question = 5; possibleAnswer4.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer4.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 4
-    
+   
             const q5interval = setInterval(() => { // QUESTION 5
             if(question === 5) {
                 enableButtons()
@@ -344,34 +345,34 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. <send src='script.js'>"
                 possibleAnswer3.textContent = "c. <script src='script.js'>"
                 possibleAnswer4.textContent = "d. <svr scrpt='script.js'>"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer3.style.backgroundColor = "green"; // Corect answer is (3)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 6; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 6; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer3.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                 setTimeout(() => { correctmsg.remove(); question = 6; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                 setTimeout(() => { correctmsg.remove(); question = 6; possibleAnswer3.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer3.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 5
-        
+       
             const q6interval = setInterval(() => { // QUESTION 6
             if(question === 6) {
                 enableButtons()
@@ -381,34 +382,34 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. getElementsById=('demo').textContent = 'Hello'"
                 possibleAnswer3.textContent = "c. getDemoElement=('textContent') = 'Hello'"
                 possibleAnswer4.textContent = "d. getElementById('demo').textContent = 'Hello'"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer4.style.backgroundColor = "green"; // Corect answer is (4)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 7; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 7; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer4.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                 setTimeout(() => { correctmsg.remove(); question = 7; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                 setTimeout(() => { correctmsg.remove(); question = 7; possibleAnswer4.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer4.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 6
-    
+   
             const q7interval = setInterval(() => { // QUESTION 7
             if(question === 7) {
                 enableButtons()
@@ -418,35 +419,35 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. set Function Add()"
                 possibleAnswer3.textContent = "c. function Add()"
                 possibleAnswer4.textContent = "d. set Function(add)"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer3.style.backgroundColor = "green"; // Corect answer is (3)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 8; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 8; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer3.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                 setTimeout(() => { correctmsg.remove(); question = 8; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                 setTimeout(() => { correctmsg.remove(); question = 8; possibleAnswer3.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer3.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 7
-    
+   
             const q8interval = setInterval(() => { // QUESTION 8
             if(question === 8) {
                 enableButtons()
@@ -456,34 +457,34 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. let promise = create Promise(() => {resolve, reject})"
                 possibleAnswer3.textContent = "c. let promise = add Promise(() => {resolve, reject})"
                 possibleAnswer4.textContent = "d. let promise = set Promise() => {resolve, reject})"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer1.style.backgroundColor = "green"; // Corect answer is (1)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 9; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 9; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5";
+                [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer1.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                setTimeout(() => { correctmsg.remove(); question = 9; possibleAnswer1.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { correctmsg.remove(); question = 9; possibleAnswer1.style.backgroundColor = "#33cef5";
+                [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer2, possibleAnswer3, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer1.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 8
-        
+       
             const q9interval = setInterval(() => { // QUESTION 9
             if(question === 9) {
                 enableButtons()
@@ -493,34 +494,34 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. Memory is automatically freed when objects are unreferenced"
                 possibleAnswer3.textContent = "c. Garbage Collection only occurs at program termination"
                 possibleAnswer4.textContent = "d. Garbage collection only works on global variables"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer2.style.backgroundColor = "green"; // Corect answer is (2)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 10; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 10; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer2.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                 setTimeout(() => { correctmsg.remove(); question = 10; possibleAnswer2.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                 setTimeout(() => { correctmsg.remove(); question = 10; possibleAnswer2.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer2.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 9
-    
+   
             const q10interval = setInterval(() => { // QUESTION 10
             if(question === 10) {
                 enableButtons()
@@ -530,34 +531,34 @@ function selectDifficulty() {
                 possibleAnswer2.textContent = "b. A CSS framework for styling websites"
                 possibleAnswer3.textContent = "c. A JS Library for building user interfaces"
                 possibleAnswer4.textContent = "d. A tool for managing server-side operations"
-    
+   
                 function handleIncorrectClick(e) {
                 possibleAnswer3.style.backgroundColor = "green"; // Corect answer is (3)
                 e.target.style.backgroundColor = "red";
                 easyquizcontainer.append(incorrectmsg);
                 disableButtons()
-    
-                setTimeout(() => { incorrectmsg.remove(); question = 11; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                setTimeout(() => { incorrectmsg.remove(); question = 11; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 function handleCorrectClick() {
                 possibleAnswer3.style.backgroundColor = "green";
                 easyquizcontainer.append(correctmsg);
                 score = score + 1
                 disableButtons()
-    
-                 setTimeout(() => { correctmsg.remove(); question = 11; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+   
+                 setTimeout(() => { correctmsg.remove(); question = 11; possibleAnswer3.style.backgroundColor = "#33cef5";
+                [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
                 possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
         }
-    
+   
                 [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
                 possibleAnswer3.addEventListener('click', handleCorrectClick);
             }
         }, 300) // END OF QUESTION 10
-    
+   
             const qEndinterval = setInterval(() => { // THE END
             if(question === 11) {
                 clearInterval(qEndinterval)
@@ -567,7 +568,7 @@ function selectDifficulty() {
                 result.style.fontSize = "2vh"
                 result.textContent = `You got a score of ${score} / 10!`
                 easyquizcontainer.append(result)
-    
+   
                 let grade = "?"
                 if (score > 0 && score <=2) {
                     grade = "F"
@@ -588,15 +589,15 @@ function selectDifficulty() {
                 } else {
                     grade = "U"
                 }
-    
+   
                 let DOMgrade = document.createElement('p')
-                DOMgrade.textContent = "You got a grade: " + grade 
+                DOMgrade.textContent = "You got a grade: " + grade
                 DOMgrade.style.fontSize = "2vh"
                 easyquizcontainer.append(DOMgrade)
 
                 let passOrfail = document.createElement('p')
                 passOrfail.style.fontSize = "2vh"
-    
+   
                 if(score >= 6) {
                     passOrfail.textContent = "You Passed!"
                 } else {
@@ -608,10 +609,10 @@ function selectDifficulty() {
         }, 300)
 
         clearMemoryLeaks()
-    } 
-    
+    }
+   
 // THE END OF EASY QUIZ & MAIN VARIABLES
-        
+       
 let mediumquizcontainer = document.getElementById('mediumquizcontainer')
 let mediumquestiontitle = document.getElementById('mediumquestiontitle')
 
@@ -656,7 +657,7 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 2; possibleAnswer2.style.backgroundColor = "#33cef5"; 
+            setTimeout(() => { correctmsg.remove(); question = 2; possibleAnswer2.style.backgroundColor = "#33cef5";
             [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000)
         }
@@ -681,8 +682,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 3; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 3; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -692,8 +693,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 3; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 3; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -718,8 +719,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 4; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 4; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -729,8 +730,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 4; possibleAnswer2.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 4; possibleAnswer2.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer3, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -755,8 +756,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 5; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 5; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -766,8 +767,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 5; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 5; possibleAnswer3.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -775,7 +776,7 @@ function medDiffFunctionality() {
             possibleAnswer3.addEventListener('click', handleCorrectClick);
         }
     }, 300) // END OF QUESTION 4
-    
+   
         const q5interval = setInterval(() => { // QUESTION 5
         if(question === 5) {
             enableButtons()
@@ -792,8 +793,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 6; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 6; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -803,8 +804,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 6; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 6; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -829,8 +830,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 7; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 7; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -840,8 +841,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 7; possibleAnswer3.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 7; possibleAnswer3.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -866,8 +867,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 8; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 8; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -877,8 +878,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 8; possibleAnswer1.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 8; possibleAnswer1.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -903,8 +904,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 9; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer3, possibleAnswer1, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 9; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer1, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -914,8 +915,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 9; possibleAnswer2.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer3, possibleAnswer1, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 9; possibleAnswer2.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer1, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -940,8 +941,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 10; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer3, possibleAnswer1, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 10; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer1, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -951,8 +952,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 10; possibleAnswer4.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer3, possibleAnswer1, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 10; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer1, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -977,8 +978,8 @@ function medDiffFunctionality() {
             mediumquizcontainer.append(incorrectmsg);
             disableButtons()
 
-            setTimeout(() => { incorrectmsg.remove(); question = 11; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { incorrectmsg.remove(); question = 11; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -988,8 +989,8 @@ function medDiffFunctionality() {
             score = score + 1
             disableButtons()
 
-            setTimeout(() => { correctmsg.remove(); question = 11; possibleAnswer1.style.backgroundColor = "#33cef5"; 
-            [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick)); 
+            setTimeout(() => { correctmsg.remove(); question = 11; possibleAnswer1.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick));
             possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
     }
 
@@ -1028,7 +1029,7 @@ function medDiffFunctionality() {
             } else {
                 grade = "U"
             }
-            
+           
             let DOMgrade = document.createElement('p')
             DOMgrade.textContent = "You got a grade " + grade
             DOMgrade.style.fontSize = "2vh"
@@ -1048,9 +1049,261 @@ function medDiffFunctionality() {
     clearMemoryLeaks()
 }
 
+// END OF MEDIUM QUIZ
+
+
+
+
+let hardquizcontainer = document.getElementById('hardquizcontainer')
+let hardquestiontitle = document.getElementById('hardquestiontitle')
+
+
+function hardDiff() {
+    showLoadAnimation()
+    difficulty = "Hard"
+    console.log("Hard Difficulty Chosen, setting display")
+    difficultycontainer = document.getElementById('difficulty-container').style.display = "none" // Hides difficulty selector
+    setTimeout(() => {
+        fadeInFlex(hardquizcontainer)
+    }, 1300) // Matches load animation
+    hardDiffFunctionality()
+}
+
+
+function hardDiffFunctionality() {
+    const hardquizcontainer = document.getElementById('hardquizcontainer')
+    let question = 1
+    let hardquestiontitle = document.getElementById('hardquestiontitle')
+    let possibleAnswer1 = document.getElementById('hardA1') 
+    let possibleAnswer2 = document.getElementById('hardA2')
+    let possibleAnswer3 = document.getElementById('hardA3')
+    let possibleAnswer4 = document.getElementById('hardA4')
+
+    let score = 0
+
+    if(question === 1) { // QUESTION 1
+        function handleIncorrectClick(e) {
+            possibleAnswer4.style.backgroundColor = "green" // Correct answer is 4
+            e.target.style.backgroundColor = "red"
+            hardquizcontainer.append(incorrectmsg)
+            disableButtons()
+
+            setTimeout(() => { incorrectmsg.remove(); question = 2; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5"  ;
+            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000)
+        }
+
+        function handleCorrectClick() {
+            possibleAnswer4.style.backgroundColor = "green";
+            hardquizcontainer.append(correctmsg)
+            score = score + 1
+            disableButtons()
+
+            setTimeout(() => { correctmsg.remove(); question = 2; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000)
+        }
+
+        [possibleAnswer1, possibleAnswer2, possibleAnswer3].forEach(el => el.addEventListener('click', handleIncorrectClick));
+        possibleAnswer4.addEventListener('click', handleCorrectClick)
+    } // END OF QUESTION 1
+
+    const q2interval = setInterval(() => { // QUESTION 2
+        if(question === 2) {
+            enableButtons()
+            clearInterval(q2interval)
+            hardquestiontitle.textContent = "Q2: How does JS handle type coercion with == ?"
+            possibleAnswer1.textContent = "a. It compares values without converting types"
+            possibleAnswer2.textContent = "b. It converts both values to strings before comparing"
+            possibleAnswer3.textContent = "c. It converts operands to the same type before comparing"
+            possibleAnswer4.textContent = "d. It throws an error if types differ"
+
+            function handleIncorrectClick(e) {
+            possibleAnswer3.style.backgroundColor = "green"; // Corect answer is (3)
+            e.target.style.backgroundColor = "red";
+            hardquizcontainer.append(incorrectmsg);
+            disableButtons()
+
+            setTimeout(() => { incorrectmsg.remove(); question = 3; e.target.style.backgroundColor = "#33cef5"; possibleAnswer3.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            function handleCorrectClick() {
+            possibleAnswer3.style.backgroundColor = "green";
+            hardquizcontainer.append(correctmsg);
+            score = score + 1
+            disableButtons()
+
+            setTimeout(() => { correctmsg.remove(); question = 3; possibleAnswer3.style.backgroundColor = "#33cef5";
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer3.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            [possibleAnswer1, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
+            possibleAnswer3.addEventListener('click', handleCorrectClick);
+        }
+    }, 300) // END OF QUESTION 2
+
+    const q3interval = setInterval(() => { // QUESTION 3
+        if(question === 3) {
+            enableButtons()
+            clearInterval(q3interval)
+            hardquestiontitle.textContent = "Q3: How to use strict in JS?"
+            possibleAnswer1.textContent = "a. 'use strict'"
+            possibleAnswer2.textContent = "b. 'use strict mode'"
+            possibleAnswer3.textContent = "c. 'strict'"
+            possibleAnswer4.textContent = "d. 'differ strict'"
+
+            function handleIncorrectClick(e) {
+            possibleAnswer1.style.backgroundColor = "green"; // Corect answer is (1)
+            e.target.style.backgroundColor = "red";
+            hardquizcontainer.append(incorrectmsg);
+            disableButtons()
+
+            setTimeout(() => { incorrectmsg.remove(); question = 4; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            function handleCorrectClick() {
+            possibleAnswer1.style.backgroundColor = "green";
+            hardquizcontainer.append(correctmsg);
+            score = score + 1
+            disableButtons()
+
+            setTimeout(() => { correctmsg.remove(); question = 4; possibleAnswer1.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            [possibleAnswer3, possibleAnswer2, possibleAnswer4].forEach(el => el.addEventListener('click', handleIncorrectClick));
+            possibleAnswer1.addEventListener('click', handleCorrectClick);
+        }
+    }, 300) // END OF QUESTION 3
+
+    const q4interval = setInterval(() => { // QUESTION 4
+        if(question === 4) {
+            enableButtons()
+            clearInterval(q4interval)
+            hardquestiontitle.textContent = "Q4: How to create an async Function in JS?"
+            possibleAnswer1.textContent = "a. new async function"
+            possibleAnswer2.textContent = "b. differ function"
+            possibleAnswer3.textContent = "c. as function"
+            possibleAnswer4.textContent = "d. async function"
+
+            function handleIncorrectClick(e) {
+            possibleAnswer4.style.backgroundColor = "green"; // Corect answer is (4)
+            e.target.style.backgroundColor = "red";
+            hardquizcontainer.append(incorrectmsg);
+            disableButtons()
+
+            setTimeout(() => { incorrectmsg.remove(); question = 5; e.target.style.backgroundColor = "#33cef5"; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer2, possibleAnswer1].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            function handleCorrectClick() {
+            possibleAnswer4.style.backgroundColor = "green";
+            hardquizcontainer.append(correctmsg);
+            score = score + 1
+            disableButtons()
+
+            setTimeout(() => { correctmsg.remove(); question = 5; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer2, possibleAnswer1].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer4.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            [possibleAnswer3, possibleAnswer2, possibleAnswer1].forEach(el => el.addEventListener('click', handleIncorrectClick));
+            possibleAnswer4.addEventListener('click', handleCorrectClick);
+        }
+    }, 300) // END OF QUESTION 4
+
+    const q5interval = setInterval(() => { // QUESTION 5
+        if(question === 5) {
+            enableButtons()
+            clearInterval(q5interval)
+            hardquestiontitle.textContent = "Q5: What are the three Function Borrows?"
+            possibleAnswer1.textContent = "a. set, find, fix"
+            possibleAnswer2.textContent = "b. call, apply, bind"
+            possibleAnswer3.textContent = "c. grab, set, find"
+            possibleAnswer4.textContent = "d. add, remove, fix"
+
+            function handleIncorrectClick(e) {
+            possibleAnswer2.style.backgroundColor = "green"; // Corect answer is (2)
+            e.target.style.backgroundColor = "red";
+            hardquizcontainer.append(incorrectmsg);
+            disableButtons()
+
+            setTimeout(() => { incorrectmsg.remove(); question = 6; e.target.style.backgroundColor = "#33cef5"; possibleAnswer2.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer4, possibleAnswer1].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            function handleCorrectClick() {
+            possibleAnswer2.style.backgroundColor = "green";
+            hardquizcontainer.append(correctmsg);
+            score = score + 1
+            disableButtons()
+
+            setTimeout(() => { correctmsg.remove(); question = 6; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer4, possibleAnswer1].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer2.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            [possibleAnswer3, possibleAnswer4, possibleAnswer1].forEach(el => el.addEventListener('click', handleIncorrectClick));
+            possibleAnswer2.addEventListener('click', handleCorrectClick);
+        }
+    }, 300) // END OF QUESTION 5
+
+    const q6interval = setInterval(() => { // QUESTION 6
+        if(question === 6) {
+            enableButtons()
+            clearInterval(q6interval)
+            hardquestiontitle.textContent = "Q6: What does LCP stand for in memory?"
+            possibleAnswer1.textContent = "a. Largest Contentful Paint"
+            possibleAnswer2.textContent = "b. Largest Created Point"
+            possibleAnswer3.textContent = "c. Longest Contentful Paint"
+            possibleAnswer4.textContent = "d. Last Constant Paint"
+
+            function handleIncorrectClick(e) {
+            possibleAnswer1.style.backgroundColor = "green"; // Corect answer is (1)
+            e.target.style.backgroundColor = "red";
+            hardquizcontainer.append(incorrectmsg);
+            disableButtons()
+
+            setTimeout(() => { incorrectmsg.remove(); question = 7; e.target.style.backgroundColor = "#33cef5"; possibleAnswer1.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            function handleCorrectClick() {
+            possibleAnswer1.style.backgroundColor = "green";
+            hardquizcontainer.append(correctmsg);
+            score = score + 1
+            disableButtons()
+
+            setTimeout(() => { correctmsg.remove(); question = 7; possibleAnswer4.style.backgroundColor = "#33cef5";
+            [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.removeEventListener('click', handleIncorrectClick));
+            possibleAnswer1.removeEventListener('click', handleCorrectClick); }, 3000);
+    }
+
+            [possibleAnswer3, possibleAnswer4, possibleAnswer2].forEach(el => el.addEventListener('click', handleIncorrectClick));
+            possibleAnswer1.addEventListener('click', handleCorrectClick);
+        }
+    }, 300) // END OF QUESTION 5
+}
+
+
+
 
 function clearMemoryLeaks() {
     window.clearTimeout()
     window.clearInterval()
     window.removeEventListener()
 }
+
+
+
+
+
